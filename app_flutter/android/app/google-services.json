@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "546868437156",
+    "firebase_url": "https://meallo-server.firebaseio.com",
+    "project_id": "meallo-server",
+    "storage_bucket": "meallo-server.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546868437156:android:153bf88dad82ff76a3c631",
+        "android_client_info": {
+          "package_name": "com.leohass.appflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546868437156-gfck97812f5dq2gvagrp3l0gfrsqbq1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdJf_c3DnWHn4S5yfnAzROzXeHjvWvVcw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546868437156-gfck97812f5dq2gvagrp3l0gfrsqbq1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

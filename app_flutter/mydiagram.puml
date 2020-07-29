@@ -1,0 +1,587 @@
+@startuml
+set namespaceSeparator ::
+
+class "appflutter::screens::splash::SplashViewModel.dart::SplashViewModel" {
+  +dynamic navToNextScreen()
+}
+
+class "appflutter::screens::splash::SplashScreen.dart::SplashScreen" {
+  +SplashScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::splash::SplashScreen.dart::SplashScreen"
+
+class "appflutter::screens::splash::SplashScreen.dart::SplashScreenState" {
+  +SplashViewModel viewModel
+  +void initState()
+  +Widget build()
+  -Widget _buildTopPart()
+  -Widget _buildBottomPart()
+}
+
+"appflutter::screens::splash::SplashScreen.dart::SplashScreenState" o-- "appflutter::screens::splash::SplashViewModel.dart::SplashViewModel"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::splash::SplashScreen.dart::SplashScreenState"
+
+class "appflutter::screens::main_screens::search::SearchMainScreen.dart::SearchMainScreen" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::search::SearchMainScreen.dart::SearchMainScreen"
+
+class "appflutter::screens::main_screens::search::SearchMainScreen.dart::SearchMainScreenState" {
+  +SearchMainViewModel viewModel
+  +TextEditingController searchQueryTextFieldController
+  +void dispose()
+  +Widget build()
+  -Widget _buildSearchInput()
+  -Widget _buildMealsListView()
+}
+
+"appflutter::screens::main_screens::search::SearchMainScreen.dart::SearchMainScreenState" o-- "appflutter::screens::main_screens::search::SearchMainViewModel.dart::SearchMainViewModel"
+"appflutter::screens::main_screens::search::SearchMainScreen.dart::SearchMainScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::search::SearchMainScreen.dart::SearchMainScreenState"
+
+class "appflutter::screens::main_screens::search::SearchMainViewModel.dart::SearchMainViewModel" {
+  +List<RecipeResponse> recipes
+  +bool isLoading
+  +dynamic loadRecommendationsRecipes()
+  +dynamic searchRecipes()
+  +dynamic navToRecipeInfoPage()
+}
+
+class "appflutter::screens::main_screens::common::viewModels::SearchDetailsViewModel.dart::SearchDetailsViewModel" {
+  +List<String> includedProducts
+  +List<String> excludedProducts
+  +List<String> units
+  +List<TextEditingController> valuesControllers
+  +String currentText
+  +List<String> unitTypes
+  +double defaultUnitValue
+  -List<RecipeCategory> _recipeCategories
+  +dynamic addIncludedProduct()
+  +dynamic addExcludedProducts()
+  +dynamic addRecipeCategory()
+  +dynamic removeRecipeCategory()
+  +String getRecipeCategoryName()
+  +int getRecipeCategoriesCount()
+  +dynamic navToRecipesPage()
+}
+
+class "appflutter::screens::main_screens::common::viewModels::InfoReceiptViewModel.dart::InfoReceiptViewModel" {
+  +RecipeResponse recipeInfo
+  +List<RecipeResponse> recipes
+  +List<bool> stepsStates
+  +double rating
+  +dynamic setNewRating()
+  -dynamic _setAsyncNewRating()
+  +dynamic loadRecipes()
+  +dynamic navToRecipeInfoPage()
+  +dynamic visitPage()
+  +dynamic changeFavoriteState()
+  +dynamic changeRecipeStepsState()
+  +Widget getTileTitle()
+  +Widget getTileSubtitle()
+  +dynamic navToMainScreen()
+}
+
+"appflutter::screens::main_screens::common::viewModels::InfoReceiptViewModel.dart::InfoReceiptViewModel" o-- "appflutter::common::network::firebase_recipes_service.dart::RecipeResponse"
+
+class "appflutter::screens::main_screens::common::viewModels::ListReceiptsViewModel.dart::ListReceiptsViewModel" {
+  +List<RecipeResponse> recipes
+  +bool isLoading
+  +dynamic loadRecipes()
+  +dynamic navToRecipeInfoPage()
+}
+
+class "appflutter::screens::main_screens::common::ListReceiptsScreen.dart::ListReceiptsScreen" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::common::ListReceiptsScreen.dart::ListReceiptsScreen"
+
+class "appflutter::screens::main_screens::common::ListReceiptsScreen.dart::ListReceiptsScreenState" {
+  +ListReceiptsViewModel viewModel
+  +void dispose()
+  +Widget build()
+  -Widget _buildMealsListView()
+}
+
+"appflutter::screens::main_screens::common::ListReceiptsScreen.dart::ListReceiptsScreenState" o-- "appflutter::screens::main_screens::common::viewModels::ListReceiptsViewModel.dart::ListReceiptsViewModel"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::common::ListReceiptsScreen.dart::ListReceiptsScreenState"
+
+class "appflutter::screens::main_screens::common::InfoReceiptScreen.dart::InfoReceiptsScreen" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::common::InfoReceiptScreen.dart::InfoReceiptsScreen"
+
+class "appflutter::screens::main_screens::common::InfoReceiptScreen.dart::InfoReceiptsScreenState" {
+  +InfoReceiptViewModel viewModel
+  +void dispose()
+  +Widget build()
+  -Widget _buildMealsListView()
+}
+
+"appflutter::screens::main_screens::common::InfoReceiptScreen.dart::InfoReceiptsScreenState" o-- "appflutter::screens::main_screens::common::viewModels::InfoReceiptViewModel.dart::InfoReceiptViewModel"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::common::InfoReceiptScreen.dart::InfoReceiptsScreenState"
+
+class "appflutter::screens::main_screens::common::InfoReceiptScreen.dart::MySliverAppBar" {
+  +double expandedHeight
+  +String imageUrl
+  +String title
+  +String subtitle
+  +String time
+  +dynamic rating
+  +double maxExtent
+  +double minExtent
+  +Widget build()
+  +bool shouldRebuild()
+}
+
+"flutter::src::widgets::sliver_persistent_header.dart::SliverPersistentHeaderDelegate" <|-- "appflutter::screens::main_screens::common::InfoReceiptScreen.dart::MySliverAppBar"
+
+class "appflutter::screens::main_screens::common::SearchDetailsScreen.dart::SearchDetailsScreen" {
+  +_SearchDetailsScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::common::SearchDetailsScreen.dart::SearchDetailsScreen"
+
+class "appflutter::screens::main_screens::common::SearchDetailsScreen.dart::_SearchDetailsScreenState" {
+  +SearchDetailsViewModel viewModel
+  +GlobalKey<AutoCompleteTextFieldState<String>> key1
+  +GlobalKey<AutoCompleteTextFieldState<String>> key2
+  +SimpleAutoCompleteTextField textFieldForIncludedProducts
+  +SimpleAutoCompleteTextField textFieldForExcludedProducts
+  +TextEditingController recipeNameController
+  +void dispose()
+  +Widget build()
+  -Widget _buildHeader()
+  -Widget _buildBottomTail()
+  -Widget _buildIncludedProductListItem()
+  -Widget _buildExcludedProductListItem()
+  -Widget _buildCategoryListItem()
+  -Widget _buildListItemTrailing()
+}
+
+"appflutter::screens::main_screens::common::SearchDetailsScreen.dart::_SearchDetailsScreenState" o-- "appflutter::screens::main_screens::common::viewModels::SearchDetailsViewModel.dart::SearchDetailsViewModel"
+"appflutter::screens::main_screens::common::SearchDetailsScreen.dart::_SearchDetailsScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<AutoCompleteTextFieldState<String>>"
+"appflutter::screens::main_screens::common::SearchDetailsScreen.dart::_SearchDetailsScreenState" o-- "autocomplete_textfield::autocomplete_textfield.dart::SimpleAutoCompleteTextField"
+"appflutter::screens::main_screens::common::SearchDetailsScreen.dart::_SearchDetailsScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::common::SearchDetailsScreen.dart::_SearchDetailsScreenState"
+
+class "appflutter::screens::main_screens::profile::ProfileMainViewModel.dart::ProfileMainViewModel" {
+  -FirebaseUser _firebaseUser
+  +List<RecipeResponse> presentedRecipes
+  -List<RecipeResponse> _historyRecipes
+  -List<RecipeResponse> _favoritesRecipes
+  +bool isLoading
+  +bool isHistoryTabChecked
+  +String userName
+  +String userSurname
+  +dynamic Function() onLoadData
+  +void loadFirebaseUser()
+  +void loadHistory()
+  +void loadFavorites()
+  +dynamic changeCheckedTab()
+  +Widget getProfileTitle()
+  +Widget getProfileSubtitle()
+  +dynamic logOut()
+  +dynamic navToRecipeInfoPage()
+}
+
+"appflutter::screens::main_screens::profile::ProfileMainViewModel.dart::ProfileMainViewModel" o-- "firebase_auth::firebase_auth.dart::FirebaseUser"
+"appflutter::screens::main_screens::profile::ProfileMainViewModel.dart::ProfileMainViewModel" o-- "appflutter::screens::main_screens::profile::ProfileMainViewModel.dart::dynamic Function()"
+
+class "appflutter::screens::main_screens::profile::ProfileMainScreen.dart::ProfileMainScreen" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::profile::ProfileMainScreen.dart::ProfileMainScreen"
+
+class "appflutter::screens::main_screens::profile::ProfileMainScreen.dart::ProfileMainScreenState" {
+  +ProfileMainViewModel viewModel
+  +void dispose()
+  +Widget build()
+  -Widget _buildTopBarUserInfo()
+  -Widget _buildHistoryFavoritesTabs()
+  -Widget _buildReceiptsContent()
+}
+
+"appflutter::screens::main_screens::profile::ProfileMainScreen.dart::ProfileMainScreenState" o-- "appflutter::screens::main_screens::profile::ProfileMainViewModel.dart::ProfileMainViewModel"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::profile::ProfileMainScreen.dart::ProfileMainScreenState"
+
+class "appflutter::screens::main_screens::food::FoodMainScreen.dart::FoodMainScreen" {
+  +FoodMainViewModel viewModel
+  +Widget build()
+  +Widget buildMethodCard()
+}
+
+"appflutter::screens::main_screens::food::FoodMainScreen.dart::FoodMainScreen" o-- "appflutter::screens::main_screens::food::FoodMainViewModel.dart::FoodMainViewModel"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "appflutter::screens::main_screens::food::FoodMainScreen.dart::FoodMainScreen"
+
+class "appflutter::screens::main_screens::food::FoodMainViewModel.dart::FoodSearchMethod" {
+  +int index
+  {static} +List<FoodSearchMethod> values
+  {static} +FoodSearchMethod AI
+  {static} +FoodSearchMethod GALLERY
+  {static} +FoodSearchMethod HAND_WRITE
+}
+
+"appflutter::screens::main_screens::food::FoodMainViewModel.dart::FoodSearchMethod" o-- "appflutter::screens::main_screens::food::FoodMainViewModel.dart::FoodSearchMethod"
+
+class "appflutter::screens::main_screens::food::FoodMainViewModel.dart::FoodMainViewModel" {
+  +dynamic handleMethodAction()
+}
+
+class "appflutter::screens::main_screens::food::subscreens::viewModels::CameraFoodPickerViewModel.dart::CameraFoodPickerViewModel" {
+  +bool isDetecting
+  +double currentTimeSec
+  +List<String> foodIngredientsResults
+  +ImageLabeler cloudLabeler
+  +CameraLensDirection direction
+  +CameraController camera
+  +GlobalKey<ScaffoldState> scaffoldState
+  +dynamic initializeCamera()
+  +dynamic navToSearchDetailsScreen()
+  +dynamic filterFoodResults()
+  +dynamic printToLogDetectedIngredients()
+}
+
+"appflutter::screens::main_screens::food::subscreens::viewModels::CameraFoodPickerViewModel.dart::CameraFoodPickerViewModel" o-- "firebase_ml_vision::firebase_ml_vision.dart::ImageLabeler"
+"appflutter::screens::main_screens::food::subscreens::viewModels::CameraFoodPickerViewModel.dart::CameraFoodPickerViewModel" o-- "camera::camera.dart::CameraLensDirection"
+"appflutter::screens::main_screens::food::subscreens::viewModels::CameraFoodPickerViewModel.dart::CameraFoodPickerViewModel" o-- "camera::camera.dart::CameraController"
+"appflutter::screens::main_screens::food::subscreens::viewModels::CameraFoodPickerViewModel.dart::CameraFoodPickerViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+
+class "appflutter::screens::main_screens::food::subscreens::viewModels::ManuallyFoodPickerViewModel.dart::ManuallyFoodPickerViewModel" {
+  +List<String> addedProducts
+  +List<String> units
+  +List<TextEditingController> valuesControllers
+  +String currentText
+  +List<String> unitTypes
+  +double defaultUnitValue
+  +dynamic addProduct()
+  +dynamic navToRecipesPage()
+}
+
+class "appflutter::screens::main_screens::food::subscreens::viewModels::GalleryFoodPickerViewModel.dart::GalleryFoodPickerViewModel" {
+  +List<Asset> images
+  +Future loadAssets()
+  +dynamic navigateToSearchDetailsScreen()
+  -Future _detectFoodOnImages()
+}
+
+class "appflutter::screens::main_screens::food::subscreens::CameraFoodPickerScreen.dart::CameraFoodPickerScreen" {
+  +CameraFoodPickerScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::food::subscreens::CameraFoodPickerScreen.dart::CameraFoodPickerScreen"
+
+class "appflutter::screens::main_screens::food::subscreens::CameraFoodPickerScreen.dart::CameraFoodPickerScreenState" {
+  -GlobalKey<ScaffoldState> _scaffoldKey
+  +CameraFoodPickerViewModel viewModel
+  +void dispose()
+  +Widget build()
+}
+
+"appflutter::screens::main_screens::food::subscreens::CameraFoodPickerScreen.dart::CameraFoodPickerScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"appflutter::screens::main_screens::food::subscreens::CameraFoodPickerScreen.dart::CameraFoodPickerScreenState" o-- "appflutter::screens::main_screens::food::subscreens::viewModels::CameraFoodPickerViewModel.dart::CameraFoodPickerViewModel"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::food::subscreens::CameraFoodPickerScreen.dart::CameraFoodPickerScreenState"
+
+class "appflutter::screens::main_screens::food::subscreens::GalleryFoodPickerScreen.dart::GalleryFoodPickerScreen" {
+  +GalleryFoodPickerScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::food::subscreens::GalleryFoodPickerScreen.dart::GalleryFoodPickerScreen"
+
+class "appflutter::screens::main_screens::food::subscreens::GalleryFoodPickerScreen.dart::GalleryFoodPickerScreenState" {
+  +GalleryFoodPickerViewModel viewModel
+  +void dispose()
+  +Widget build()
+  +Widget buildGridView()
+}
+
+"appflutter::screens::main_screens::food::subscreens::GalleryFoodPickerScreen.dart::GalleryFoodPickerScreenState" o-- "appflutter::screens::main_screens::food::subscreens::viewModels::GalleryFoodPickerViewModel.dart::GalleryFoodPickerViewModel"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::food::subscreens::GalleryFoodPickerScreen.dart::GalleryFoodPickerScreenState"
+
+class "appflutter::screens::main_screens::food::subscreens::ManuallyFoodPickerScreen.dart::ManuallyFoodPickerScreen" {
+  +_ManuallyFoodPickerScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::food::subscreens::ManuallyFoodPickerScreen.dart::ManuallyFoodPickerScreen"
+
+class "appflutter::screens::main_screens::food::subscreens::ManuallyFoodPickerScreen.dart::_ManuallyFoodPickerScreenState" {
+  +ManuallyFoodPickerViewModel viewModel
+  +GlobalKey<AutoCompleteTextFieldState<String>> key
+  +SimpleAutoCompleteTextField textField
+  +void dispose()
+  +Widget build()
+  -Widget _buildHeader()
+  -Widget _buildBottomTail()
+  -Widget _buildListItem()
+  -Widget _buildListItemTrailing()
+}
+
+"appflutter::screens::main_screens::food::subscreens::ManuallyFoodPickerScreen.dart::_ManuallyFoodPickerScreenState" o-- "appflutter::screens::main_screens::food::subscreens::viewModels::ManuallyFoodPickerViewModel.dart::ManuallyFoodPickerViewModel"
+"appflutter::screens::main_screens::food::subscreens::ManuallyFoodPickerScreen.dart::_ManuallyFoodPickerScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<AutoCompleteTextFieldState<String>>"
+"appflutter::screens::main_screens::food::subscreens::ManuallyFoodPickerScreen.dart::_ManuallyFoodPickerScreenState" o-- "autocomplete_textfield::autocomplete_textfield.dart::SimpleAutoCompleteTextField"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::food::subscreens::ManuallyFoodPickerScreen.dart::_ManuallyFoodPickerScreenState"
+
+class "appflutter::screens::main_screens::MainHomeViewModel.dart::MainHomeViewModel" {
+  +int currentPageIndex
+  +dynamic changePage()
+}
+
+class "appflutter::screens::main_screens::MainHomeScreen.dart::MainHomeScreen" {
+  +MainHomeScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::main_screens::MainHomeScreen.dart::MainHomeScreen"
+
+class "appflutter::screens::main_screens::MainHomeScreen.dart::MainHomeScreenState" {
+  +MainHomeViewModel viewModel
+  +Widget build()
+  -Widget _buildMainPageBody()
+  -Widget _buildPageContainer()
+  -Widget _buildBottomNavBar()
+}
+
+"appflutter::screens::main_screens::MainHomeScreen.dart::MainHomeScreenState" o-- "appflutter::screens::main_screens::MainHomeViewModel.dart::MainHomeViewModel"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::main_screens::MainHomeScreen.dart::MainHomeScreenState"
+
+class "appflutter::screens::login::LoginViewModel.dart::LoginViewModel" {
+  +bool isLoginPageState
+  +void changeLoginPageState()
+  +void logInWithFacebook()
+  +void logInWithGoogle()
+  +void logInWithEmail()
+  +void registerWithEmail()
+}
+
+class "appflutter::screens::login::LoginScreen.dart::LoginScreen" {
+  +_LoginScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "appflutter::screens::login::LoginScreen.dart::LoginScreen"
+
+class "appflutter::screens::login::LoginScreen.dart::_LoginScreenState" {
+  +LoginViewModel viewModel
+  -GlobalKey<ScaffoldState> _scaffoldKey
+  +TextEditingController emailTextFieldController
+  +TextEditingController pass1TextFieldController
+  +TextEditingController pass2TextFieldController
+  +void dispose()
+  -void _changeLoginPageState()
+  -void _handleRegLogButtonClick()
+  +Widget build()
+  -Widget _buildBackgroundWidget()
+  -Widget _buildMainContentWidgets()
+  -Widget _buildTopInputFormsWidgets()
+  -Widget _buildBottomInputFormsWidgets()
+  -Widget _buildLoginTextForm()
+  -Widget _buildPasswordTextForm()
+  -Widget _buildLoginBtn()
+  -Widget _buildSignInWithText()
+  -Widget _buildSocialBtn()
+  -Widget _buildSocialBtnRow()
+  -Widget _buildSignUpBtn()
+}
+
+"appflutter::screens::login::LoginScreen.dart::_LoginScreenState" o-- "appflutter::screens::login::LoginViewModel.dart::LoginViewModel"
+"appflutter::screens::login::LoginScreen.dart::_LoginScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"appflutter::screens::login::LoginScreen.dart::_LoginScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "appflutter::screens::login::LoginScreen.dart::_LoginScreenState"
+
+class "appflutter::main.dart::MainApp" {
+  {static} +List<Widget> pages
+  +Map<String, Widget Function(BuildContext)> mainRoutes
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "appflutter::main.dart::MainApp"
+
+class "appflutter::common::res::Strings.dart::Strings" {
+  {static} +String APP_NAME
+  {static} +String EMPTY
+  {static} +String NEXT
+  {static} +String SKIP
+  {static} +String MAIN_PHRASE
+  {static} +String GET_STARTED
+  {static} +String ON_BOARDING_TITLE_1
+  {static} +String ON_BOARDING_TITLE_2
+  {static} +String ON_BOARDING_TITLE_3
+  {static} +String SIGN_IN
+  {static} +String SIGN_UP
+  {static} +String LOGIN
+  {static} +String PASSWORD
+  {static} +String REGISTER
+  {static} +String ENTER_YOUR_LOGIN
+  {static} +String REPEAT_PASSWORD
+  {static} +String ENTER_YOUR_PASSWORD
+  {static} +String OR
+  {static} +String SIGN_IN_WITH
+  {static} +String DO_NOT_HAVE_ACCOUNT
+  {static} +String ALREADY_HAVE_ACCOUNT
+  {static} +String AI
+  {static} +String GALLERY
+  {static} +String HAND_WRITE
+  {static} +String SEARCH_HINT
+  {static} +String RECIPE_INFO
+  {static} +String RECIPES
+  {static} +String DETAILS
+  {static} +String GALLERY_PICKER
+  {static} +String MANUALLY
+  {static} +String HISTORY
+  {static} +String FAVORITES
+}
+
+class "appflutter::common::res::Styles.dart::Styles" {
+  {static} +TextStyle TextWhite14
+  {static} +TextStyle TextWhite16
+  {static} +TextStyle TextOrange16
+  {static} +TextStyle TextBlack20
+  {static} +TextStyle TextWhite20
+  {static} +TextStyle TextWhite22
+  {static} +TextStyle TextWhiteBold12
+  {static} +TextStyle TextWhiteBold14
+  {static} +TextStyle TextWhiteBold16
+  {static} +TextStyle TextWhiteBold20
+  {static} +TextStyle TextBlackBold14
+  {static} +TextStyle TextBlackBold16
+  {static} +TextStyle TextBlackBold18
+  {static} +TextStyle TextBlackBold20
+  {static} +TextStyle TextWhiteBold24
+  {static} +TextStyle TextBlackBold24
+  {static} +TextStyle TextWhiteBold35
+  {static} +TextStyle TextOrangeAccentBold35
+  {static} +TextStyle TextSpecialBold16
+  {static} +TextStyle TextSpecialBold20
+  {static} +TextStyle TextSpecialBold24
+  {static} +TextStyle TextSpecialBold26
+  {static} +TextStyle TextSpecialBold32
+}
+
+"appflutter::common::res::Styles.dart::Styles" o-- "flutter::src::painting::text_style.dart::TextStyle"
+
+class "appflutter::common::res::Images.dart::Images" {
+  {static} +String ON_BOARDING_RES_1
+  {static} +String ON_BOARDING_RES_2
+  {static} +String ON_BOARDING_RES_3
+  {static} +String FACEBOOK_RES
+  {static} +String GOOGLE_RES
+  {static} +String FOOD_AI_RES
+  {static} +String FOOD_GALLERY_RES
+  {static} +String FOOD_HAND_WRITE_RES
+  {static} +CircleAvatar SPLASH_MAIN_ICON
+}
+
+"appflutter::common::res::Images.dart::Images" o-- "flutter::src::material::circle_avatar.dart::CircleAvatar"
+
+class "appflutter::common::res::UIColors.dart::UIColors" {
+  {static} +Color ON_BOARDING_START_GRADIENT
+  {static} +Color ON_BOARDING_END_GRADIENT
+}
+
+"appflutter::common::res::UIColors.dart::UIColors" o-- "dart::ui::Color"
+
+class "appflutter::common::network::firebase_recipes_service.dart::FirebaseApiService" {
+  {static} +String FIRE_BASE_URL
+  {static} +Future getUserHistory()
+  {static} +Future getUserFavorites()
+  {static} +Future getUserRecommendations()
+  {static} +Future getUserRecommendationsNeural()
+  {static} +dynamic putUserRecipeRating()
+  {static} +dynamic visitPage()
+  {static} +dynamic addToFavorites()
+  {static} +dynamic removeFromFavorites()
+  {static} +dynamic getRecipesByIngredients()
+  {static} +dynamic addUser()
+}
+
+class "appflutter::common::network::firebase_recipes_service.dart::RecipeRequest" {
+  +String user
+  +String name
+  +List<String> ingredients
+  +List<String> ingredients_n
+  +List<String> categories
+}
+
+class "appflutter::common::network::firebase_recipes_service.dart::RecipeResponse" {
+  +String name
+  +String description
+  +String image
+  +dynamic rating
+  +String total_time
+  +List ingredients
+  +List steps
+  +List categories
+  +dynamic user_rating
+  +int is_favorite
+  +int views_count
+  +int compareTo()
+}
+
+"dart::core::Comparable<T>" <|-- "appflutter::common::network::firebase_recipes_service.dart::RecipeResponse"
+
+class "appflutter::common::utils::CameraUtils.dart::CameraUtils" {
+  {static} +Future getCamera()
+  {static} +Future detect()
+  {static} -Uint8List _concatenatePlanes()
+  {static} -FirebaseVisionImageMetadata _buildMetaData()
+  {static} -ImageRotation _rotationIntToImageRotation()
+}
+
+class "appflutter::common::utils::NavController.dart::NavController" {
+  {static} +String KEY_PATH_LOGIN_SCREEN
+  {static} +String KEY_PATH_MAIN_SCREEN
+  {static} +String KEY_PATH_MAIN_FOOD_SCREEN
+  {static} +String KEY_PATH_MAIN_SEARCH_SCREEN
+  {static} +String KEY_PATH_MAIN_PROFILE_SCREEN
+  {static} +String KEY_FOOD_GALLERY
+  {static} +String KEY_FOOD_MANUALLY
+  {static} +String KEY_FOOD_CAMERA
+  {static} +String KEY_FOOD_GALLERY_DETAILS
+  {static} +String KEY_FOOD_GALLERY_RECEIPTS
+  {static} +String KEY_FOOD_GALLERY_RECEIPT_INFO
+  {static} +void navToLoginScreen()
+  {static} +void navToMainScreen()
+  {static} +void navToFoodGalleryPickerScreen()
+  {static} +void navToFoodManually()
+  {static} +void navToFoodCamera()
+  {static} +void navToFoodGalleryReceipts()
+  {static} +void navToFoodGalleryReceiptInfo()
+  {static} +void navToFoodSearchDetails()
+}
+
+class "appflutter::common::utils::Prefs.dart::Prefs" {
+  {static} -SharedPreferences _preferences
+  {static} +String KEY_PREFS_IS_SHOWED_ON_BOARDING
+  {static} +Future getValue()
+  {static} +dynamic changeValue()
+}
+
+"appflutter::common::utils::Prefs.dart::Prefs" o-- "shared_preferences::shared_preferences.dart::SharedPreferences"
+
+class "appflutter::common::data::recipes.dart::Recipe" {
+  +String name
+  +String description
+  +RecipeInfo recipeInfo
+  +bool isFavorite
+  {static} +List getRecipesFromProductList()
+  {static} +List getMockedRecipes()
+}
+
+"appflutter::common::data::recipes.dart::Recipe" o-- "appflutter::common::data::recipes.dart::RecipeInfo"
+
+class "appflutter::common::data::recipes.dart::RecipeInfo" {
+  +List<String> steps
+  +bool isFavorite
+  {static} +RecipeInfo getRecipeInfo()
+}
+
+class "appflutter::common::data::recipes.dart::RecipeCategory" {
+  +String categoryName
+  {static} +List getCategories()
+}
+
+
+@enduml

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MealloFlutter</string>
+    <string name="facebook_app_id">2410410189249844</string>
+    <string name="fb_login_protocol_scheme">fb2410410189249844</string>
+
+
+</resources>
